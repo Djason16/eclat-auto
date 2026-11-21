@@ -1,0 +1,132 @@
+/*
+ * Bottom of every page (Footer), from the original: light grey under a slanted edge rising from the black page. On a
+ * large screen the help block sits on the left and the columns on the right; under 1440 px everything is centered,
+ * with the columns two by two, then one by one on a phone.
+ */
+.footer-container {
+    padding: var(--space-normal) var(--page-gutter) 0;
+    overflow: hidden;
+    background-color: var(--light);
+    color: var(--black);
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-xlarge);
+    padding-bottom: var(--space-normal);
+}
+
+.footer h2,
+.footer h3 {
+    margin-bottom: var(--space-small);
+    color: var(--black);
+    font-size: var(--font-normal);
+    font-weight: 700;
+    text-transform: none;
+}
+
+.footer-help {
+    display: grid;
+    align-content: start;
+    gap: var(--space-small);
+}
+
+.footer-links {
+    display: flex;
+    gap: var(--space-xlarge);
+}
+
+.footer ul {
+    display: grid;
+    gap: var(--space-xs);
+}
+
+.footer p,
+.footer li {
+    color: var(--black);
+    font-size: var(--font-normal);
+    line-height: 1.5;
+}
+
+.footer a:not(.btn),
+.footer-link {
+    border: none;
+    background: none;
+    color: var(--black);
+    font-size: var(--font-normal);
+    font-style: italic;
+    cursor: pointer;
+}
+
+/* Link of the page being read: dark gold and bold, like the header */
+.footer a[aria-current="page"] {
+    color: var(--gold-dark);
+    font-weight: 700;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .footer a:not(.btn):hover,
+    .footer-link:hover {
+        color: var(--gold-dark);
+    }
+
+    /* The current link also answers the mouse */
+    .footer a[aria-current="page"]:hover {
+        color: var(--black);
+    }
+}
+
+.footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-small) var(--space-large);
+    padding-block: var(--space-normal);
+    border-top: 1px solid rgb(0 0 0 / 25%);
+}
+
+.footer-payment {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-small);
+}
+
+.footer-payment .icon {
+    color: var(--grey);
+    font-size: var(--font-xlarge);
+}
+
+@media (max-width: 1440px) {
+    .footer-top {
+        flex-direction: column;
+        gap: var(--space-normal);
+        text-align: center;
+    }
+
+    .footer-links {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-small);
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-links {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        padding-bottom: calc(var(--control-size) + var(--space-large));
+        text-align: center;
+    }
+}
+
+/* Tablets: room for the floating button at the bottom right */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .footer-bottom {
+        padding-right: calc(var(--control-size) + var(--space-normal));
+    }
+}

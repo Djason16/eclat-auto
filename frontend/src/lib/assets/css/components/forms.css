@@ -1,0 +1,132 @@
+/* Fields of every form (FormField): label, field, hint and error message */
+.form {
+    display: grid;
+    gap: var(--space-normal);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+    gap: var(--space-normal);
+}
+
+.field {
+    display: grid;
+    gap: var(--space-xs);
+    min-width: 0;
+}
+
+.field-label {
+    color: var(--text-color);
+    font-size: var(--font-normal);
+    font-weight: 400;
+}
+
+.field-required {
+    color: var(--danger);
+}
+
+.field-control {
+    width: 100%;
+    min-height: var(--field-height);
+    /* The same inner space on the left and on the right: the icons inside the fields (arrow, eye, calendar) sit there */
+    padding: var(--space-small) var(--space-medium);
+    /* The thick grey border of the original, dark enough for the 3:1 rule of the fields */
+    border: 2px solid #8c8c8c;
+    border-radius: 0;
+    background-color: var(--white);
+    color: var(--black);
+    /* 16 px at least: iPhones do not zoom into the field */
+    font-size: var(--font-normal);
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.field-control::placeholder {
+    color: #6b6b6b;
+    font-size: var(--font-normal);
+    opacity: 1;
+}
+
+/* Lists: our own arrow, as far from the right edge as the text is from the left one; the text never runs under it */
+select.field-control {
+    padding-right: calc(2 * var(--space-medium) + var(--icon-size-fixed));
+    background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230c0c0c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right var(--space-medium) center / var(--icon-size-fixed);
+    appearance: none;
+    cursor: pointer;
+}
+
+/* Calendar and clock of the date and time fields: in the same right space */
+.field-control::-webkit-calendar-picker-indicator {
+    margin: 0;
+    cursor: pointer;
+}
+
+textarea.field-control {
+    min-height: 8rem;
+    resize: vertical;
+}
+
+.field-control:focus-visible {
+    outline: none;
+    border-color: var(--gold-medium);
+    box-shadow: 0 0 0 3px rgb(187 150 55 / 30%);
+}
+
+.field-control[aria-invalid="true"] {
+    border-color: var(--danger);
+    background-color: #fff8f8;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .field-control:hover {
+        border-color: var(--gold-dark);
+    }
+}
+
+.field-hint {
+    color: var(--text-color-muted);
+    font-size: var(--font-small);
+}
+
+/* Check box with its text */
+.field-check {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-small);
+    font-size: var(--font-small);
+    line-height: 1.5;
+    color: var(--text-color-muted);
+}
+
+.field-check input {
+    flex-shrink: 0;
+    width: var(--check-size);
+    height: var(--check-size);
+    /* Centred on the first line of the text, whatever its size (1lh = one line) */
+    margin: calc((1lh - var(--check-size)) / 2) 0 0;
+    accent-color: var(--gold-dark);
+}
+
+/* In a row of fields: the box in a frame as tall as the inputs, the text centred in it */
+.field-check-boxed {
+    align-items: center;
+    min-height: var(--field-height);
+    /* Same padding and line as the inputs (.field-control): exactly their height */
+    padding: var(--space-small);
+    border: 2px solid #8c8c8c;
+    background-color: var(--white);
+    color: var(--black);
+    font-size: var(--font-normal);
+    cursor: pointer;
+}
+
+.field-check-boxed input {
+    margin: 0;
+}
+
+.form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-small);
+    align-items: center;
+}

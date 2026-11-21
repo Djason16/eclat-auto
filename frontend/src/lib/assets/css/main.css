@@ -1,0 +1,30 @@
+/* Font of the site (Montserrat) */
+@import "utils/fonts.css";
+
+/* Colors, fonts, sizes and spaces used everywhere */
+@import "utils/variables.css";
+
+/* Reset, layout helpers and spacing classes */
+@import "base/global.css";
+
+/* Hidden titles, keyboard focus, long texts and touch areas */
+@import "base/accessibility.css";
+
+/* Titles, paragraphs, links and text size classes */
+@import "base/typography.css";
+
+/* One file per shared component */
+@import "components/app-shell.css";
+@import "components/header.css";
+@import "components/footer.css";
+@import "components/loader.css";
+@import "components/buttons.css";
+@import "components/forms.css";
+@import "components/overlays.css";
+@import "components/data-list.css";
+@import "components/preferences-banner.css";
+@import "components/section-layout.css";
+@import "components/page-hero.css";
+@import "components/premium.css";
+@import "components/booking.css";
+@import "components/expandable.css";

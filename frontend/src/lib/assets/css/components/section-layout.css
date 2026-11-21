@@ -1,0 +1,165 @@
+/*
+ * Blocks of a page, from the original layout:
+ *   .section          light grey block with dark text (forms, lists, the main content of a page)
+ *   .section-dark     black block (.info-block: the centered text over a veil that fades to black)
+ *   .gold-band        the full-width gold title band (GoldBand) that opens each part of a page
+ */
+.section {
+    position: relative;
+    padding-block: var(--space-xlarge);
+    background-color: var(--light);
+    color: var(--text-color);
+}
+
+.section-white {
+    background-color: var(--white);
+}
+
+/*
+ * Information blocks (InfoBlock): black with a soft gold glow, the photo in a framed panel (gold line on top, soft
+ * shadow, a dark gradient at the bottom for depth) next to the text; stacked on a phone. Straight edges only.
+ */
+.info-block {
+    padding-block: var(--space-xxlarge);
+    background: var(--gold-glow), var(--black);
+}
+
+.info-block-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: var(--space-xlarge);
+}
+
+.info-block-reverse .info-block-photo {
+    order: 2;
+}
+
+.info-block-single .info-block-grid {
+    grid-template-columns: minmax(0, 46rem);
+    justify-content: center;
+}
+
+.info-block-photo {
+    position: relative;
+    min-height: 22rem;
+    border-top: 3px solid var(--gold);
+    background: linear-gradient(180deg, transparent 55%, rgb(0 0 0 / 55%)), var(--lazy-photo, none) center / cover no-repeat, var(--black-2);
+    box-shadow: var(--shadow-strong);
+}
+
+.info-block-content {
+    display: grid;
+    justify-items: start;
+    gap: var(--space-normal);
+}
+
+.info-block-single .info-block-content {
+    justify-items: center;
+    text-align: center;
+}
+
+.info-block-content h2 {
+    color: var(--text-light);
+    font-size: var(--font-display);
+    font-style: italic;
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+.info-block-text {
+    max-width: 52ch;
+    color: var(--grey-light);
+    font-size: var(--font-large);
+    line-height: 1.6;
+}
+
+.info-block-points {
+    display: grid;
+    gap: var(--space-small);
+    list-style: none;
+}
+
+.info-block-points li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-small);
+    color: var(--text-light);
+}
+
+.info-block-icon {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: var(--control-size);
+    height: var(--control-size);
+    border: 1px solid rgb(187 150 55 / 55%);
+    color: var(--gold);
+    font-size: var(--font-large);
+}
+
+.info-block-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-small);
+    margin-top: var(--space-small);
+}
+
+@media (max-width: 900px) {
+    .info-block-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--space-large);
+    }
+
+    .info-block-reverse .info-block-photo {
+        order: 0;
+    }
+
+    .info-block-photo {
+        min-height: 0;
+        aspect-ratio: 16 / 9;
+    }
+}
+
+/* Gold title band of the original: centered white capitals on the gold color, 4 rem high */
+.gold-band {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 4rem;
+    padding: var(--space-small) var(--page-gutter);
+    background-color: var(--gold-band);
+    color: var(--white);
+    font-weight: 700;
+    font-size: var(--font-xlarge);
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/*
+ * Soft reveal, once, when the block reaches the screen: a fade with a slight rise, the items of a row one after the
+ * other (--reveal-delay). Made with an animation and the "translate" property, so it never fights the transitions and
+ * hover transforms of the cards. The hidden state only applies with JavaScript (.js on <html>): content is never lost.
+ */
+.js .reveal:not(.revealed) {
+    opacity: 0;
+    translate: 0 var(--space-large);
+}
+
+.js .reveal.revealed {
+    animation: reveal-in var(--duration-rise) var(--ease) var(--reveal-delay, 0ms) both;
+}
+
+@keyframes reveal-in {
+    from {
+        opacity: 0;
+        translate: 0 var(--space-large);
+    }
+
+    to {
+        opacity: 1;
+        translate: none;
+    }
+}

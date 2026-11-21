@@ -1,0 +1,298 @@
+/* Windows (Modal), notifications (Toasts), demo banner and guided tour */
+/* Window of the original: translucent white, blurred, square, 500 px wide at most, the cross at the top right */
+.modal {
+    display: grid;
+    gap: var(--space-normal);
+    width: min(100%, 500px);
+    padding: var(--space-large);
+    background-color: rgb(255 255 255 / 94%);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 10px rgb(0 0 0 / 10%);
+}
+
+.modal-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-normal);
+}
+
+.modal-head h2 {
+    font-size: var(--font-xlarge);
+    text-transform: none;
+}
+
+.modal-close {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border: none;
+    background: none;
+    color: var(--black);
+    font-size: var(--font-normal);
+    cursor: pointer;
+    transition: transform var(--transition);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .modal-close:hover {
+        transform: rotate(90deg);
+    }
+}
+
+.modal-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-small);
+}
+
+@media (max-width: 480px), (max-height: 480px) {
+    .modal {
+        padding: var(--space-normal);
+    }
+}
+
+/*
+ * Notifications: black cards with straight edges and a gold bar on top (red for an error), under the
+ * header on the right; the whole width under the header on a phone. 3 at most (stores/actions/uiActions.ts).
+ */
+.toasts {
+    position: fixed;
+    top: calc(var(--toasts-top, var(--header-height)) + var(--space-normal));
+    right: var(--space-normal);
+    z-index: 600;
+    display: grid;
+    gap: var(--space-small);
+    width: min(calc(100% - 2 * var(--space-normal)), 24rem);
+    list-style: none;
+    pointer-events: none;
+}
+
+.toast {
+    --toast-accent: var(--gold);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: start;
+    gap: var(--space-small);
+    padding: var(--space-medium) var(--space-normal);
+    border-top: 4px solid var(--toast-accent);
+    background-color: var(--black);
+    box-shadow: var(--shadow-strong);
+    color: var(--light);
+    pointer-events: auto;
+}
+
+.toast-error { --toast-accent: var(--danger-light); }
+
+.toast-icon {
+    color: var(--toast-accent);
+    font-size: var(--font-large);
+    line-height: 1;
+}
+
+.toast-body {
+    display: grid;
+    gap: var(--space-xs);
+}
+
+.toast-title {
+    color: var(--toast-accent);
+    font-size: var(--font-small);
+    font-style: italic;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.toast-body p:not(.toast-title) {
+    color: var(--light);
+    font-size: var(--font-small);
+    line-height: 1.5;
+}
+
+.toast-close {
+    display: grid;
+    place-items: center;
+    width: 2rem;
+    height: 2rem;
+    margin: calc(-1 * var(--space-xs)) 0 0;
+    border: none;
+    background: none;
+    color: var(--grey-light);
+    cursor: pointer;
+    transition: color var(--transition), transform var(--transition);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .toast-close:hover {
+        color: var(--white);
+        transform: rotate(90deg);
+    }
+}
+
+@media (max-width: 480px) {
+    .toasts {
+        top: calc(var(--toasts-top, var(--header-height)) + var(--space-small));
+        right: var(--space-small);
+        width: calc(100% - 2 * var(--space-small));
+    }
+}
+
+/* Windows: a gold bar on top, red for a confirmation that deletes or cancels; the message with its icon */
+.modal {
+    border-top: 4px solid var(--gold);
+}
+
+.modal.modal-danger {
+    border-top-color: var(--danger);
+}
+
+.modal-notice {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-small);
+    align-items: start;
+}
+
+.modal-notice .icon {
+    color: var(--gold-dark);
+    font-size: var(--font-large);
+}
+
+.modal-danger .modal-notice .icon {
+    color: var(--danger);
+}
+
+/* Thin banner at the very top: this is a demo. One line; on a phone the detail goes and the tools are small chips */
+.demo-banner {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+.demo-banner .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-small) var(--space-normal);
+    padding-block: var(--space-xs);
+}
+
+.demo-banner p {
+    min-width: 0;
+    overflow: hidden;
+    color: var(--grey-light);
+    font-size: var(--font-smaller);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.demo-banner strong {
+    color: var(--gold);
+}
+
+.demo-banner ul {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: var(--space-small);
+    list-style: none;
+}
+
+.demo-banner-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    padding: var(--space-xs) var(--space-xxs);
+    border: none;
+    background: none;
+    color: var(--white);
+    font-size: var(--font-smaller);
+    font-weight: 700;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color var(--transition);
+}
+
+/* A discreet dot between the two tools */
+.demo-banner li + li::before {
+    content: "·";
+    margin-right: var(--space-small);
+    color: var(--grey-light);
+}
+
+/* Link of the page being read (« Ce que comprend ce site »): gold, like the links of the header */
+.demo-banner-link[aria-current="page"] {
+    color: var(--gold);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .demo-banner-link:hover {
+        color: var(--gold);
+    }
+
+    /* The current link also answers the mouse */
+    .demo-banner-link[aria-current="page"]:hover {
+        color: var(--white);
+    }
+}
+
+/* Phones: the label above, the three tools under it (on the narrowest screens they wrap, without the dots) */
+@media (max-width: 640px) {
+    .demo-banner-detail {
+        display: none;
+    }
+
+    .demo-banner .container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0;
+    }
+
+    .demo-banner ul {
+        flex-shrink: 1;
+        flex-wrap: wrap;
+        gap: 0 var(--space-normal);
+    }
+
+    .demo-banner li + li::before {
+        content: none;
+    }
+
+    .demo-banner-link {
+        padding-inline: 0;
+    }
+}
+
+/* Guided tour: a bubble at the bottom of the screen */
+.tour {
+    position: fixed;
+    left: 50%;
+    bottom: var(--space-normal);
+    z-index: 550;
+    display: grid;
+    gap: var(--space-small);
+    width: min(calc(100% - 2 * var(--space-normal)), 28rem);
+    max-height: calc(100dvh - 2 * var(--space-normal));
+    padding: var(--space-large);
+    overflow-y: auto;
+    border-radius: var(--radius-large);
+    box-shadow: var(--shadow-strong);
+    transform: translateX(-50%);
+}
+
+.tour-step {
+    color: var(--gold);
+    font-size: var(--font-smaller);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+@media (max-height: 480px) {
+    .tour {
+        padding: var(--space-normal);
+    }
+}

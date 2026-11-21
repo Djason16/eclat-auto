@@ -1,0 +1,110 @@
+/*
+ * Hero of the inner pages (PageHero), built like the home hero: the blurred photo under the dark-to-gold veil of the
+ * original (or a dark background with a soft gold glow), the breadcrumb, the gold kicker, a big italic title with a
+ * gold word, a subtitle, the buttons. A little lower than the home hero. Straight edges, no entrance animation
+ * (it delayed the first screen on phones, Lighthouse).
+ */
+.page-hero-block {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding: calc(var(--divider-height) + var(--space-xxlarge)) var(--page-gutter) var(--space-xxlarge);
+    background-color: var(--black);
+}
+
+/* The blurred photo, drawn under the veil */
+.page-hero-block::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background: var(--hero-photo, none) center / cover no-repeat;
+}
+
+/* The veil of the original, from dark to the gold of the band */
+.page-hero-block::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--hero-veil);
+}
+
+/* Without a photo: black with a soft gold glow, the same composition */
+.page-hero-plain::after {
+    background: var(--gold-glow);
+}
+
+.page-hero {
+    position: relative;
+    display: grid;
+    gap: var(--space-normal);
+    justify-items: start;
+    max-width: var(--max-width);
+}
+
+.page-hero-crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-small);
+    color: var(--grey-light);
+    font-size: var(--font-small);
+}
+
+.page-hero-crumbs a {
+    color: var(--gold);
+    font-weight: 700;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .page-hero-crumbs a:hover {
+        color: var(--text-light);
+    }
+}
+
+.page-hero h1 {
+    max-width: 20ch;
+    color: var(--text-light);
+    font-size: var(--font-hero);
+    font-style: italic;
+    line-height: 1.05;
+    text-shadow: 0 4px 30px rgb(0 0 0 / 45%);
+    text-transform: uppercase;
+}
+
+.page-hero-accent {
+    color: var(--gold);
+}
+
+.page-hero-text {
+    max-width: 40rem;
+    color: var(--text-light);
+    font-size: var(--font-large);
+}
+
+.page-hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-small);
+    margin-top: var(--space-small);
+}
+
+.page-hero-info {
+    max-width: 40rem;
+    margin-top: var(--space-normal);
+    color: var(--text-light);
+    font-size: var(--font-small);
+}
+
+@media (max-width: 768px) {
+    .page-hero-block::before {
+        background-image: var(--hero-photo-small, var(--hero-photo, none));
+    }
+}
+
+@media (max-height: 480px) {
+    .page-hero-block {
+        padding-block: calc(var(--divider-height) + var(--space-large)) var(--space-xlarge);
+    }
+}

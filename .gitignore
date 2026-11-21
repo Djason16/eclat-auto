@@ -1,0 +1,61 @@
+# Node.js dependencies
+node_modules/
+
+# Dependency folders
+vendor/
+
+# Runtime files of the framework
+backend/var/
+backend/storage/*.key
+
+# Build and output folders
+.output/
+.nuxt/
+.nitro/
+.next/
+.svelte-kit/
+.astro/
+.cache/
+.dist/
+dist/
+out/
+build/
+
+# Files uploaded by visitors (only these folders: a code folder named uploads, like server/routes/uploads/, stays in Git;
+# the .htaccess that forbids scripts stays in Git too)
+/backend/uploads/*
+/frontend/uploads/*
+!/backend/uploads/.htaccess
+
+# Local data
+.data/
+
+# Logs
+logs/
+*.log
+
+# Systems and editors
+.DS_Store
+.idea/
+.fleet/
+
+# Environment variables
+env/
+.env
+.env.*
+!.env.example
+
+# Database files and backups
+/database/
+/backups/
+# Qualif ready to upload (start.bat then Q)
+/qualif/
+*.sql
+!example.sql
+!mysql/init/*.sql
+
+# Local SQLite databases
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+

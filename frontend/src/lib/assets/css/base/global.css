@@ -1,0 +1,115 @@
+/* Reset: the same starting point in every browser */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    /* The room of the scrollbar is always kept: nothing moves when a window opens or closes */
+    scrollbar-gutter: stable;
+    scroll-behavior: smooth;
+    /* Thin scrollbar in the colors of the site */
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold) var(--black);
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+/*
+ * A window is open: the page keeps its place (its scrollbar room stays, scrollbar-gutter above) but only the window
+ * scrolls, so there is never a second scrollbar on screen.
+ */
+html:has(dialog[open]) {
+    overflow: hidden;
+}
+
+::selection {
+    background-color: var(--gold);
+    color: var(--black);
+}
+
+/* Black page of the original design; the content blocks set their own background */
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    background-color: var(--black);
+    color: var(--text-color);
+    font-family: var(--font-primary);
+    font-size: var(--font-normal);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+}
+
+img,
+svg,
+video {
+    display: block;
+    max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+    color: inherit;
+}
+
+ul[role="list"],
+ol[role="list"] {
+    list-style: none;
+}
+
+/* Centered content: the side margins of the original (5 rem on a large screen, 1 rem at least on a phone) */
+.container {
+    width: min(100% - 2 * var(--page-gutter), var(--max-width));
+    margin-inline: auto;
+}
+
+/* Dark block (hero, info blocks, service cards): the theme variables switch to light text and gold accents */
+.surface-dark {
+    --text-color: var(--text-light);
+    --text-color-muted: var(--grey-light);
+    --border-color: var(--black-3);
+    --surface-color: var(--black-2);
+    --accent-color: var(--gold);
+    --focus-ring: 3px solid var(--gold);
+    background-color: var(--black);
+    color: var(--text-color);
+}
+
+/* Block of content on white (forms, lists): square, with a thin border like the original accordions */
+.card {
+    padding: var(--space-large);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    background-color: var(--surface-color);
+}
+
+/* Spacing classes: gap of a flex or grid box, margins above and under */
+.stack { display: grid; align-content: start; }
+.row { display: flex; flex-wrap: wrap; align-items: center; }
+.gap-s { gap: var(--space-small); }
+.gap-m { gap: var(--space-normal); }
+.gap-l { gap: var(--space-large); }
+.mb-s { margin-bottom: var(--space-small); }
+.mb-m { margin-bottom: var(--space-normal); }
+.mb-l { margin-bottom: var(--space-large); }
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 1ms !important;
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}

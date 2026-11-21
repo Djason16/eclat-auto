@@ -1,0 +1,281 @@
+/*
+ * Premium layer of the design: section heads (gold kicker, big italic title), chips for prices and durations, polished
+ * cards, black panels with a soft gold glow. Straight edges only (the slanted dividers are the original's ShapeDivider). Shared by the home, services, booking, account and
+ * admin screens. Same palette as the original: black, light grey, gold.
+ */
+
+/* Small gold label above a title, with a gold line before it */
+.kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-small);
+    color: var(--accent-color);
+    font-size: var(--font-small);
+    font-style: italic;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.kicker::before {
+    content: "";
+    width: 2.5rem;
+    height: 2px;
+    background: var(--gold-line);
+}
+
+.surface-dark .kicker {
+    color: var(--gold);
+}
+
+/* Head of a section: kicker, big italic title, short text */
+.section-head {
+    display: grid;
+    gap: var(--space-small);
+    max-width: 46rem;
+    margin-bottom: var(--space-large);
+}
+
+.section-head.center {
+    justify-items: center;
+    margin-inline: auto;
+    text-align: center;
+}
+
+.section-head h2 {
+    font-size: var(--font-display);
+    font-style: italic;
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+.section-head p {
+    color: var(--text-color-muted);
+    font-size: var(--font-large);
+}
+
+/* Titles of the cards (italic capitals) and big titles of the dark blocks */
+.card-title {
+    font-size: var(--font-large);
+    font-style: italic;
+    text-transform: uppercase;
+}
+
+.card-title-large {
+    font-size: var(--font-xlarge);
+    font-style: italic;
+    text-transform: uppercase;
+}
+
+.display-title {
+    color: var(--text-color);
+    font-size: var(--font-display);
+    font-style: italic;
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+/* Chips: price, duration, badges */
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-small);
+    border: 1px solid var(--border-color);
+    background-color: var(--surface-color);
+    color: var(--text-color);
+    font-size: var(--font-small);
+    font-weight: 700;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+.chip .icon {
+    color: var(--accent-color);
+}
+
+.chip-gold {
+    border-color: var(--gold);
+    background-color: var(--gold);
+    color: var(--black);
+}
+
+.chip-gold .icon {
+    color: var(--black);
+}
+
+.chip-dark {
+    border-color: var(--black-3);
+    background-color: var(--black-2);
+    color: var(--text-light);
+}
+
+.chip-dark .icon {
+    color: var(--gold);
+}
+
+.chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-small);
+}
+
+/* Polished card: white, thin border, a gold line drawn on top on hover, lifted a little */
+/*
+ * In a grid of cards, every card takes the height of the tallest one (stretch) and its last button sits at the bottom
+ * (margin-top: auto): the buttons of a row are always aligned, whatever the length of the lists.
+ */
+.premium-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-normal);
+    padding: var(--space-large);
+    border: 1px solid var(--border-color);
+    background-color: var(--surface-color);
+    box-shadow: 0 1px 0 rgb(0 0 0 / 4%);
+    transition: transform var(--duration-fast) var(--ease), box-shadow var(--duration-fast) var(--ease), border-color var(--transition);
+}
+
+.premium-card > .btn:last-child,
+.premium-card .card-end {
+    margin-top: auto;
+}
+
+.premium-card::before {
+    content: "";
+    position: absolute;
+    inset: calc(-1 * var(--space-hairline)) calc(-1 * var(--space-hairline)) auto;
+    height: 3px;
+    background: var(--gold-line);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--duration-fast) var(--ease);
+}
+
+.premium-card.featured::before {
+    transform: scaleX(1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .premium-card:hover {
+        box-shadow: var(--shadow);
+        transform: translateY(-4px);
+    }
+
+    .premium-card:hover::before {
+        transform: scaleX(1);
+    }
+}
+
+/* Square icon in gold on black, on top of the cards and steps */
+.picto {
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--black);
+    color: var(--gold);
+    font-size: var(--font-xlarge);
+}
+
+/* Black panel with a soft gold glow, the base of the premium dark sections */
+.texture-dark {
+    background: var(--gold-glow), var(--black);
+    color: var(--text-light);
+}
+
+/* Big figure with its label (KPIs, trust numbers) */
+.figure {
+    display: grid;
+    gap: var(--space-xs);
+}
+
+.figure strong {
+    color: var(--accent-color);
+    font-size: var(--font-xxlarge);
+    font-style: italic;
+    line-height: 1;
+}
+
+.surface-dark .figure strong {
+    color: var(--gold);
+}
+
+.figure span {
+    color: var(--text-color-muted);
+    font-size: var(--font-small);
+}
+
+.surface-dark .figure span {
+    color: var(--grey-light);
+}
+
+/*
+ * White card on a dark section (forms before the footer): the theme of a light block comes back inside it, so the page
+ * ends on the dark background and flows into the footer without a light block touching it.
+ */
+.light-card {
+    --text-color: var(--black);
+    --text-color-muted: var(--grey);
+    --border-color: var(--line);
+    --surface-color: var(--white);
+    --accent-color: var(--gold-dark);
+    --focus-ring: 3px solid var(--gold-dark);
+    --link-hover-color: var(--gold-medium);
+    max-width: 56rem;
+    margin-inline: auto;
+    padding: var(--space-xlarge) var(--space-large);
+    border-top: 3px solid var(--gold);
+    background-color: var(--light);
+    box-shadow: var(--shadow-strong);
+    color: var(--black);
+}
+
+/*
+ * Rows of cards whose parts line up (site-wide rule): the container is a grid, each card spans --card-rows rows of it
+ * and shares them (grid-template-rows: subgrid), so in a row of cards the badges, titles, texts, prices, lists and
+ * buttons start at the same height. Every card renders all its parts in the same order (an empty .card-slot keeps the
+ * place of a missing badge or hint); the last part (the button) sits at the bottom.
+ *   <div class="aligned-cards" style:--card-rows="6"> <article class="aligned-card">...6 parts...</article> </div>
+ */
+.aligned-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--card-min, 16rem)), 1fr));
+    gap: var(--space-large);
+}
+
+.aligned-card,
+.premium-card.aligned-card {
+    display: grid;
+    grid-row: span var(--card-rows, 6);
+    grid-template-rows: subgrid;
+    row-gap: var(--space-small);
+}
+
+.aligned-card > :last-child {
+    align-self: end;
+}
+
+.card-slot {
+    min-height: 0;
+}
+
+/* List of short points with their pictogram on the first line (IconList) */
+.icon-list {
+    display: grid;
+    align-content: start;
+    gap: var(--space-small);
+    list-style: none;
+}
+
+.icon-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-small);
+}
+
+.icon-list .icon {
+    margin-top: calc((1lh - var(--icon-size)) / 2);
+    color: var(--accent-color);
+}

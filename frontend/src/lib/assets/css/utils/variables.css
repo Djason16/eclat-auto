@@ -1,0 +1,158 @@
+/*
+ * Root variables of Éclat Auto, taken from the design of the original site: black, light grey and gold, square corners,
+ * Montserrat (free, close to the original font), italic links and buttons, the original font scale.
+ * Changes for the contrast rules: gold is a fill or a text on black only (7:1); on light grey the gold text becomes
+ * --gold-dark (7:1), and the grey texts are darker on light backgrounds.
+ */
+:root {
+    /* Palette of the original design */
+    --gold: #bb9637;
+    --gold-medium: #9a7a2c;
+    --gold-dark: #6b4d1a;
+    --gold-soft: #f1e8cf;
+    /* Gold of the title bands: a little deeper than --gold, so their white capitals keep 3:1 (large text) */
+    --gold-band: #a6842e;
+    --light: #f3f3f3;
+    --white: #ffffff;
+    --black: #0c0c0c;
+    --black-2: #161616;
+    --black-3: #2b2b2b;
+    --line: #d0d0d0;
+    --grey: #505050;
+    --grey-light: #a8a8a8;
+    --text-light: #f7f7f7;
+
+    /* Status colors (badges, messages), AA on light grey and white */
+    --success: #2f7a2f;
+    --success-soft: #e3f1e3;
+    --warning: #9a5418;
+    --warning-soft: #f8eadc;
+    --danger: #a83232;
+    --danger-soft: #f7e1e1;
+    /* Red readable on black (notifications) */
+    --danger-light: #ec7a6f;
+
+    /* Theme of a light block (most content): text, surfaces and accent. .surface-dark switches them */
+    --surface-color: var(--white);
+    --border-color: var(--line);
+    --text-color: var(--black);
+    --text-color-muted: var(--grey);
+    --accent-color: var(--gold-dark);
+
+    /* Hero and dark blocks: the dark veil going to gold of the original hero */
+    --hero-veil: linear-gradient(180deg, rgb(15 15 15 / 60%) 10%, rgb(15 15 15 / 65%) 20%, var(--gold-band) 100%);
+    --gold-glow: radial-gradient(60% 80% at 80% 10%, rgb(187 150 55 / 28%), transparent 70%);
+    /* Premium layer: a straight gold line that shines (underlines, top borders) */
+    --gold-line: linear-gradient(90deg, var(--gold-dark), var(--gold) 45%, #e2c26f 60%, var(--gold));
+
+    /* Font of the site */
+    --font-primary: "Montserrat", "Montserrat Fallback", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+    /* Font sizes of the original scale (smaller on phones in typography.css), never under 12 px */
+    --font-smaller: 0.75rem;
+    --font-small: 0.8rem;
+    --font-normal: 1rem;
+    --font-large: 1.2rem;
+    --font-xlarge: 1.5rem;
+    --font-xxlarge: 2rem;
+    --font-tall: 3rem;
+    /* Titles of the premium sections and of the home hero */
+    --font-display: clamp(1.6rem, 1rem + 2.4vw, 2.75rem);
+    --font-hero: clamp(2rem, 1rem + 4.2vw, 4.25rem);
+
+    /* Spaces: every margin, padding and gap takes one of these steps (the original 70 px / 5 rem blocks are xlarge) */
+    --space-hairline: 1px;
+    --space-xxs: 0.125rem;
+    --space-xs: 0.25rem;
+    --space-small: 0.5rem;
+    --space-medium: 0.75rem;
+    --space-normal: 1rem;
+    --space-large: clamp(1.25rem, 1rem + 1vw, 2rem);
+    --space-xlarge: clamp(2rem, 1rem + 4vw, 5rem);
+    --space-xxlarge: clamp(3rem, 1.8rem + 5vw, 6.5rem);
+    /* Inside space of the original service cards (70 px, 40 px on a phone) and of the buttons (10 px 20 px) */
+    --space-card: clamp(2.5rem, 1rem + 4vw, 4.375rem);
+    --space-button: 0.625rem 1.25rem;
+    --space-button-small: 0.5rem 1rem;
+
+    /* Layout */
+    --max-width: 1280px;
+    /* Square controls (floating button, burger, eye of the password field): 44 px touch target */
+    --control-size: 2.75rem;
+    /* Pictogram of the steps of the home page */
+    --picto-size: 3.5rem;
+    /* Bar of the booking total fixed at the bottom of a phone */
+    --summary-bar-height: 4.25rem;
+    --field-height: 2.5rem;
+    /* Line icons (Icon.svelte), relative to the text around them */
+    --icon-size: 1.25em;
+    /* Icons drawn inside the fields (arrow of the lists), independent of the text size */
+    --icon-size-fixed: 1rem;
+    /* Check boxes of the forms */
+    --check-size: 1.15rem;
+    /* Square sign of the folding blocks (the arrow) */
+    --sign-size: 2rem;
+    --header-height: 80px;
+    --divider-height: 90px;
+    --page-gutter: clamp(1rem, 5.5vw - 0.5rem, 5rem);
+
+    /* Corners: square, like the original; a small rounding for the fields only */
+    --radius-small: 2px;
+    --radius: 0;
+    --radius-large: 0;
+    --radius-pill: 999px;
+    --shadow: 0 8px 24px rgb(0 0 0 / 12%);
+    --shadow-strong: 0 20px 50px rgb(0 0 0 / 35%);
+
+    /* Motion of the original: hovers 0.3 s, the slide from the right in 0.75 s (power2.out) */
+    --duration-hover: 0.3s;
+    --duration-fast: 0.45s;
+    --duration-reveal: 0.75s;
+    --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --transition: var(--duration-hover) var(--ease);
+    /* Folding blocks (Expandable), like Élan: a soft start when opening, a soft end when closing */
+    --duration-fold: 400ms;
+    /* Reveal of the blocks while scrolling */
+    --duration-rise: 600ms;
+    --ease-fold-enter: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-fold-exit: cubic-bezier(0.55, 0, 0.45, 1);
+
+    /* Keyboard focus, the same on every element */
+    --focus-ring: 3px solid var(--gold-dark);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --duration-hover: 1ms;
+        --duration-fast: 120ms;
+        --duration-reveal: 120ms;
+        --duration-fold: 1ms;
+        --duration-rise: 1ms;
+    }
+}
+
+/* Phones: the scale of the original goes down a step (titles), the slanted edges get lower */
+@media (max-width: 768px) {
+    :root {
+        --font-large: 1.1rem;
+        --font-xlarge: 1.3rem;
+        --font-xxlarge: 1.6rem;
+        --font-tall: 2.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --font-small: 0.75rem;
+        --font-large: 1.05rem;
+        --font-xlarge: 1.2rem;
+        --font-xxlarge: 1.5rem;
+        --font-tall: 2rem;
+    }
+}
+
+@media (max-width: 425px) {
+    :root {
+        --divider-height: 60px;
+    }
+}

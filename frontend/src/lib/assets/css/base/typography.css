@@ -1,0 +1,107 @@
+/* Titles of the original: bold, uppercase for the large ones */
+h1,
+h2,
+h3,
+h4 {
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text-color);
+    overflow-wrap: anywhere;
+}
+
+h1 {
+    font-size: var(--font-xxlarge);
+    text-transform: uppercase;
+}
+
+h2 {
+    font-size: var(--font-xlarge);
+    text-transform: uppercase;
+}
+
+h3 {
+    font-size: var(--font-large);
+}
+
+h4 {
+    font-size: var(--font-normal);
+}
+
+p,
+li,
+dd,
+dt {
+    font-size: var(--font-normal);
+    line-height: 1.5;
+}
+
+p {
+    color: var(--text-color);
+}
+
+small {
+    font-size: var(--font-small);
+}
+
+/* Links and buttons are italic in the original design */
+a,
+button {
+    font-style: italic;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+/*
+ * One link style for the whole site, never underlined: a link inside a text stands out by its color (accent: dark gold
+ * on light, gold on black, 3:1 at least against the text around it) and its weight; with a mouse it takes the text
+ * color. The keyboard focus ring stays (accessibility.css).
+ */
+.text-link,
+.icon-link {
+    color: var(--accent-color);
+    font-weight: 700;
+    transition: color var(--transition);
+}
+
+/* Link with its pictogram (phone, e-mail, address): the icon moves a little on hover */
+.icon-link {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: var(--space-small);
+}
+
+.icon-link .icon {
+    margin-top: calc((1lh - var(--icon-size)) / 2);
+    transition: transform var(--transition);
+}
+
+/* With a mouse: lighter gold on light blocks, white on dark blocks */
+@media (hover: hover) and (pointer: fine) {
+    .text-link:hover,
+    .icon-link:hover {
+        color: var(--link-hover-color, var(--gold-medium));
+    }
+
+    .icon-link:hover .icon {
+        transform: translateX(var(--space-xxs));
+    }
+}
+
+.surface-dark {
+    --link-hover-color: var(--text-light);
+}
+
+/* Text size classes of the original (.text-smaller ... .text-xlarge): every font size of the markup goes through them */
+.text-smaller { font-size: var(--font-smaller) !important; }
+.text-small { font-size: var(--font-small) !important; }
+.text-normal { font-size: var(--font-normal) !important; }
+.text-large { font-size: var(--font-large) !important; }
+.text-xlarge { font-size: var(--font-xlarge) !important; }
+
+.text-semibold { font-weight: 600 !important; }
+.text-bold { font-weight: 700 !important; }
+.text-muted { color: var(--text-color-muted); }

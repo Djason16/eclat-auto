@@ -1,0 +1,30 @@
+/*
+ * Font of the site: Montserrat (SIL Open Font License 1.1, static/fonts/Montserrat-OFL.txt), the free font closest to
+ * the geometric sans-serif of the original design. Latin subset, regular and bold; the italic of the links and buttons
+ * is drawn by the browser, like on the original (two files less to load). The bold one is preloaded in the layout.
+ */
+@font-face {
+    font-family: "Montserrat";
+    src: url("/fonts/Montserrat-400-normal.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("/fonts/Montserrat-700-normal.woff2") format("woff2");
+    font-weight: 600 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Same width as Montserrat while it loads (no jump of the text): a system font scaled to its metrics */
+@font-face {
+    font-family: "Montserrat Fallback";
+    src: local("Arial");
+    size-adjust: 112%;
+    ascent-override: 86%;
+    descent-override: 22%;
+    line-gap-override: 0%;
+}

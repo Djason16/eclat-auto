@@ -1,0 +1,71 @@
+/* The one loading screen of the site (Loader), on the first opening and on every page change, in the site's style:
+   black, the gold drop, "Chargement" in small capitals and a thin gold line that fills from the left then empties to the
+   right (like djason-chery.dev; it replaces the top bar of the original, rule of the sites). It covers the page, which
+   is already there under it. Without JavaScript it goes away by itself after 5 seconds; that safety is cut while it
+   leaves (.loader-leaving), else the clicks would stay blocked. */
+.loader {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-medium);
+    background-color: var(--black);
+    opacity: 1;
+    transition: opacity var(--duration-fast) var(--ease);
+    animation: loader-failsafe 0s linear 5s forwards;
+}
+
+.loader-leaving {
+    opacity: 0;
+    pointer-events: none;
+    animation: none;
+}
+
+.loader-mark {
+    width: 2.5rem;
+    height: 2.5rem;
+    animation: loader-float 1.6s var(--ease) infinite alternate;
+}
+
+.loader-label {
+    margin: 0;
+    color: var(--text-light);
+    font-size: var(--font-small);
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+}
+
+.loader-line {
+    width: 7rem;
+    height: 2px;
+    background-color: var(--gold);
+    transform-origin: left;
+    animation: loader-fill 1.3s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes loader-fill {
+    0% { transform: scaleX(0); transform-origin: left; }
+    50% { transform: scaleX(1); transform-origin: left; }
+    50.1% { transform: scaleX(1); transform-origin: right; }
+    100% { transform: scaleX(0); transform-origin: right; }
+}
+
+@keyframes loader-float {
+    from { transform: translateY(0); }
+    to { transform: translateY(-5px); }
+}
+
+@keyframes loader-failsafe {
+    to { visibility: hidden; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .loader-line,
+    .loader-mark {
+        animation: none;
+    }
+}

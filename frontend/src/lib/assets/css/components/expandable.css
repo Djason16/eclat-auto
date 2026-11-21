@@ -1,0 +1,75 @@
+/*
+ * Folding blocks (Expandable), like Élan Solidaire: the height follows the content in both directions (rows 0fr <-> 1fr),
+ * the text fades with it, the arrow turns in step. The inner part cuts what passes while it moves, then lets focus
+ * rings show once open. With prefers-reduced-motion the durations become almost nothing (variables.css).
+ */
+.expandable-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-normal);
+    width: 100%;
+    min-height: var(--control-size);
+    padding: var(--space-normal) var(--space-large);
+    border: none;
+    background: none;
+    color: var(--text-color);
+    font-size: var(--font-normal);
+    font-weight: 700;
+    text-align: left;
+    cursor: pointer;
+}
+
+.expandable-header:disabled {
+    cursor: default;
+}
+
+.expandable-sign {
+    display: grid;
+    flex-shrink: 0;
+    place-items: center;
+    width: var(--sign-size);
+    height: var(--sign-size);
+    background-color: var(--black);
+    color: var(--gold);
+    transition: transform var(--duration-fold) var(--ease-fold-exit);
+}
+
+.expandable-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition: grid-template-rows var(--duration-fold) var(--ease-fold-exit), opacity var(--duration-fold) var(--ease-fold-exit);
+}
+
+.expandable.is-open > .expandable-content {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    transition: grid-template-rows var(--duration-fold) var(--ease-fold-enter), opacity var(--duration-fold) var(--ease-fold-enter);
+}
+
+.expandable.is-open .expandable-sign {
+    transform: rotate(180deg);
+    transition-timing-function: var(--ease-fold-enter);
+}
+
+.expandable-inner {
+    min-height: 0;
+    overflow: hidden;
+}
+
+.expandable.is-open > .expandable-content > .expandable-inner {
+    animation: expandable-overflow 1ms linear var(--duration-fold) forwards;
+}
+
+/* Always open (large screens): no motion at all */
+.expandable.is-locked > .expandable-content,
+.expandable.is-locked > .expandable-content > .expandable-inner {
+    transition: none;
+    animation: none;
+    overflow: visible;
+}
+
+@keyframes expandable-overflow {
+    to { overflow: visible; }
+}

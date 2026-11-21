@@ -1,0 +1,195 @@
+/* Lists of the account and of the admin: status badges, empty and loading states, record cards, filter chips */
+
+/* Status badge */
+.badge {
+    display: inline-flex;
+    vertical-align: middle;
+    align-items: center;
+    gap: var(--space-xs);
+    width: fit-content;
+    padding: var(--space-xs) var(--space-small);
+    border-radius: var(--radius-pill);
+    font-size: var(--font-smaller);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.badge-pending { background-color: var(--warning-soft); color: var(--warning); }
+.badge-confirmed { background-color: var(--gold-soft); color: var(--gold-dark); }
+.badge-done { background-color: var(--success-soft); color: var(--success); }
+.badge-cancelled { background-color: var(--danger-soft); color: var(--danger); }
+
+/* Empty list */
+.empty-state {
+    padding: var(--space-large);
+    border: 2px dashed rgb(0 0 0 / 20%);
+    background-color: var(--white);
+    color: var(--grey);
+    text-align: center;
+}
+
+/* Loading of a private page: a small turning square in gold, then the text */
+.loading-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-small);
+    padding: var(--space-xlarge) 0;
+    color: var(--grey);
+}
+
+.loading-state::before {
+    content: "";
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid var(--gold);
+    border-right-color: transparent;
+    animation: btn-spin 0.9s linear infinite;
+}
+
+/*
+ * One record of a list (reservations, users, messages): a white card with a gold bar on the left, the first line
+ * (reference, name) as its title across the card, the details in two columns ("Label : value"), the actions under them.
+ */
+.records {
+    display: grid;
+    gap: var(--space-normal);
+    list-style: none;
+}
+
+.record {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+    gap: var(--space-small) var(--space-large);
+    padding: var(--space-large);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--gold);
+    background-color: var(--white);
+    color: var(--black);
+    font-size: var(--font-small);
+    box-shadow: 0 1px 0 rgb(0 0 0 / 4%);
+    transition: box-shadow var(--duration-fast) var(--ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .record:hover {
+        box-shadow: var(--shadow);
+    }
+}
+
+.record p {
+    overflow-wrap: anywhere;
+}
+
+.record a[href^="tel:"] {
+    white-space: nowrap;
+}
+
+.record strong {
+    font-weight: 700;
+}
+
+/* First line of a record: its title, across the card */
+.record > p:first-child {
+    grid-column: 1 / -1;
+    padding-bottom: var(--space-small);
+    border-bottom: 1px solid var(--line);
+    font-size: var(--font-large);
+    font-style: italic;
+}
+
+.record > :is(.record-actions, img, figure) {
+    grid-column: 1 / -1;
+}
+
+.record-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-small) var(--space-large);
+    margin-top: var(--space-small);
+    padding-top: var(--space-medium);
+    border-top: 1px solid var(--line);
+}
+
+/* Filters of a list as chips (admin): the active one in black and gold */
+.filter-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-small);
+    margin-bottom: var(--space-normal);
+}
+
+.filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-small);
+    min-height: 2.5rem;
+    padding: var(--space-xs) var(--space-normal);
+    border: 1px solid var(--border-color);
+    background-color: var(--white);
+    color: var(--black);
+    font-size: var(--font-small);
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.filter-chip[aria-pressed="true"] {
+    border-color: var(--black);
+    background-color: var(--black);
+    color: var(--gold);
+}
+
+/* Number next to a label (filters, admin tabs): its own badge, always the same, apart from the label */
+.count-badge {
+    display: inline-grid;
+    place-items: center;
+    min-width: var(--font-xlarge);
+    padding: var(--space-xxs) var(--space-small);
+    border-radius: var(--radius-pill);
+    background-color: var(--gold);
+    color: var(--black);
+    font-size: var(--font-smaller);
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.filter-chip[aria-pressed="false"] .count-badge {
+    background-color: var(--light);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .filter-chip:hover {
+        border-color: var(--gold-dark);
+    }
+}
+
+/* Text link of a record ("Annuler la réservation", "Supprimer l'utilisateur"...): gold-dark, red when it removes */
+.record-link {
+    min-height: 24px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--gold-dark);
+    font-size: var(--font-normal);
+    font-style: italic;
+    font-weight: 700;
+    text-align: left;
+    cursor: pointer;
+}
+
+.record-link-danger {
+    color: var(--danger);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .record-link:hover {
+        color: var(--black);
+    }
+
+    .record-link-danger:hover {
+        color: var(--black);
+    }
+}

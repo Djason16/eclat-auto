@@ -1,0 +1,110 @@
+/*
+ * Cookie banner (PreferencesBanner): a dark card with a gold line on top at the bottom left, the italic bold title of
+ * the notifications, a short text, then "Tout accepter" (gold) and "Tout refuser" with the same size (CNIL: refusing
+ * is as easy as accepting), and "Personnaliser" as a text link. On a phone: a sheet along the bottom edge.
+ */
+.preferences-banner {
+    position: fixed;
+    inset: auto auto var(--space-normal) var(--space-normal);
+    z-index: 100;
+    display: grid;
+    gap: var(--space-normal);
+    width: min(34rem, calc(100% - 2 * var(--space-normal)));
+    padding: var(--space-large);
+    border-top: 3px solid var(--gold);
+    background: var(--gold-glow), var(--black);
+    box-shadow: var(--shadow-strong);
+    /* Never taller than the screen (320 px high phones, landscape): it scrolls inside instead of being cut */
+    max-height: calc(100dvh - 2 * var(--space-normal));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.preferences-banner-title {
+    display: flex;
+    align-items: center;
+    gap: var(--space-small);
+    color: var(--gold);
+    font-size: var(--font-large);
+    font-style: italic;
+    text-transform: uppercase;
+}
+
+.preferences-banner-text {
+    color: var(--grey-light);
+    font-size: var(--font-small);
+    line-height: 1.6;
+}
+
+/* The categories, after "Personnaliser": label and text on the left, the switch on the right */
+.preferences-banner-categories {
+    display: grid;
+    list-style: none;
+}
+
+.preferences-banner-categories li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-normal);
+    padding-block: var(--space-small);
+    border-top: 1px solid rgb(255 255 255 / 12%);
+}
+
+.preferences-banner-category {
+    display: grid;
+    gap: var(--space-xxs);
+    color: var(--text-light);
+    font-size: var(--font-small);
+}
+
+.preferences-banner-category small {
+    color: var(--grey-light);
+}
+
+.preferences-banner-always {
+    flex-shrink: 0;
+    color: var(--gold);
+    font-size: var(--font-small);
+    font-weight: 700;
+}
+
+.preferences-banner-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-small);
+}
+
+.preferences-banner-actions .btn {
+    flex: 1 1 auto;
+}
+
+.preferences-banner-more {
+    min-height: var(--control-size);
+    padding: 0 var(--space-small);
+    border: none;
+    background: none;
+    color: var(--gold);
+    font-size: var(--font-small);
+    font-style: italic;
+    font-weight: 700;
+    cursor: pointer;
+    transition: color var(--transition);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .preferences-banner-more:hover {
+        color: var(--text-light);
+    }
+}
+
+/* Phone: a sheet along the bottom edge, the whole width */
+@media (max-width: 480px) {
+    .preferences-banner {
+        inset: auto 0 0;
+        width: 100%;
+        max-height: 100dvh;
+        padding: var(--space-normal);
+    }
+}

@@ -1,0 +1,72 @@
+/*
+ * Booking (src/lib/components/views/Booking): the grids of choice cards, their titles, prices and lists, and the panel
+ * of the total that follows the visitor (aside on a large screen, bottom sheet on a phone).
+ */
+.choices-grid {
+    --card-min: 15rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--card-min)), 1fr));
+    gap: var(--space-normal);
+    min-width: 0;
+    border: none;
+}
+
+.choices-grid > legend {
+    margin-bottom: var(--space-normal);
+}
+
+.choices-grid.invalid .choice {
+    border-color: var(--danger);
+}
+
+.choice-title {
+    font-size: var(--font-large);
+    font-style: italic;
+    text-transform: uppercase;
+}
+
+.choice-price {
+    color: var(--black);
+    font-size: var(--font-xlarge);
+    font-style: italic;
+    font-weight: 700;
+}
+
+.choice-list {
+    display: grid;
+    gap: var(--space-xs);
+    margin-top: var(--space-xs);
+    padding-top: var(--space-small);
+    border-top: 1px solid var(--border-color);
+    font-size: var(--font-small);
+}
+
+.choice-list > span {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-xs);
+}
+
+.choice-list .icon {
+    color: var(--gold-dark);
+}
+
+.choice .chip-gold {
+    justify-self: start;
+}
+
+.step-subtitle {
+    margin-bottom: var(--space-small);
+    color: var(--grey);
+    font-size: var(--font-small);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* Phone and tablet booking: the floating "back to top" button rises above the bar of the total */
+@media (max-width: 1023px) {
+    body:has(.summary-panel) .floating-controls {
+        bottom: calc(var(--summary-bar-height) + var(--space-normal));
+    }
+}
